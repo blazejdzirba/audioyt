@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from .app import run
+from audio_workspace_mini.app import run
 
 
 def main() -> int:
