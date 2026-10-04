@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "audio-workspace-mini"
+version = "0.2.0"
+description = "Terminal + generator komend yt-dlp z playlisty YouTube (cross-platform: PySide6)"
+requires-python = ">=3.11"
+dependencies = [
+    "PySide6-Essentials>=6.6",
+    "pyte>=0.8",
+    "pywinpty>=2.0; sys_platform == 'win32'",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-qt>=4"]
+
+[project.scripts]
+audio-workspace-mini = "audio_workspace_mini.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+audio_workspace_mini = ["assets/*"]

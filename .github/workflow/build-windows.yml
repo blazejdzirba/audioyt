@@ -1,0 +1,27 @@
+name: Build Windows EXE
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          pip install -e .
+          pip install pyinstaller
+      - name: Build EXE
+        run: |
+          pyinstaller --onefile --windowed --name AudioWorkspaceMini `
+            --hidden-import=winpty `
+            --collect-all=pyte `
+            --collect-all=winpty `
+            src/audio_workspace_mini/__main__.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AudioWorkspaceMini
+          path: dist/AudioWorkspaceMini.exe
